@@ -1,15 +1,80 @@
 ---
+import Layout from "../layouts/layout.astro";
+import { Background } from "../components/background";
+import Navigator from "src/layouts/navigator.astro";
+import config from "@config";
+import Footer from "src/layouts/footer.astro";
+import { Katex } from "@components/katex.astro";
+import { AstroComponentInstance } from "astro/dist/runtime/server";
+
+let title = [config.name];
+if (config.abbr) title.unshift(config.abbr);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title={title.join(" - ")}>
+  <div slot="background"><Background src="img/bg3.jpg" /></div>
+  <Navigator />
+  <main
+    class:list={[
+      "md:container",
+      ["px-4", "md:px-0"],
+      ["w-full", "md:w-5/6"],
+      "box-border",
+      "min-h-full",
+      "mx-auto",
+      "flex",
+      "flex-col",
+      "lg:flex-row",
+    ]}
+  >
+    <article
+      class="lg:flex-[7] lg:[flex-basis:0] [flex-basis:100%] order-2 lg:px-4"
+    >
+      <h1>Welcome to Fauves's Online Judge!</h1>
+
+      <Katex displayMode={true}>a^2</Katex>
+    </article>
+    <sidebar
+      class:list={[
+        "lg:flex-[3]",
+        "lg:[flex-basis:0]",
+        "[flex-basis:100%]",
+        "lg:order-3",
+        "order-1",
+        "md:px-8",
+        "lg:px-4",
+        "lg:py-6",
+        "flex",
+        "flex-col",
+        "md:flex-row",
+        "md:flex-warp",
+        "lg:flex-col",
+        "md:justify-center",
+        "lg:justify-start",
+        "items-center",
+        "md:items-center",
+        "lg:items-center",
+        "md:space-x-2",
+        "lg:space-x-0",
+      ]}
+    >
+      <div
+        class="w-full bg-aliceblue bg-opacity-[2%] md:py-4 px-6 rounded-lg mt-4 md:flex-1 md:max-w-fit lg:max-w-full lg:flex-none"
+      >
+        <p class="text-center"><a href="./login">Log in</a></p>
+        <p class="text-center"><a href="./signup">Sign up</a></p>
+      </div>
+      <div
+        class="w-full bg-aliceblue bg-opacity-[2%] md:py-4 px-6 rounded-lg mt-4 md:flex-1 md:max-w-fit lg:max-w-full lg:flex-none"
+      >
+        <h4 class="text-center">Plugins?</h4>
+        <p>
+          It seeems that you haven't install any plugins. <a href="./plugins"
+            >Try to get one?</a
+          >
+        </p>
+      </div>
+    </sidebar>
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,13 @@
+---
+import PKatex, { Props as P } from "./katex/katexInline.astro";
+import PKatexDisplay from "./katex/katexDisplay.astro";
+
+export {
+  PKatex as Katex,
+  PKatexDisplay as _KatexDisplay,
+}
+
+export interface Props extends P {}
+
+---
+<PKatex {...Astro.props}><slot /></PKatex>
